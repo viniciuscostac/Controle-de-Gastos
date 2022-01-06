@@ -1,0 +1,91 @@
+<ion-content [fullscreen]="true">
+  <form [formGroup]="expense" (ngSubmit)="addNewExpense()">
+    <ion-item class="padding">
+      <ion-label position="floating">Titulo da despesa</ion-label>
+      <ion-input
+        type="text"
+        formControlName="title"
+        required="true"
+        autofocus="true"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item class="padding">
+      <ion-label position="floating">Valor</ion-label>
+      <ion-input
+        type="number"
+        inputmode="tel"
+        formControlName="value"
+        required="true"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item class="padding">
+      <ion-label position="floating">Data de vencimento</ion-label>
+      <ion-datetime
+        displayFormat="DD/MM/YYYY"
+        formControlName="dueDate"
+        display-timezone="utc"
+        min="2020-01-01"
+        max="2100-12-31"
+        required="true"
+      >
+      </ion-datetime>
+    </ion-item>
+
+    <ion-item class="padding" (click)="presentActionSheet()">
+      <ion-label *ngIf="!categoryData">Categoria</ion-label>
+      <ion-label *ngIf="categoryData" position="stacked">Categoria</ion-label>
+      <input formControlName="category" type="hidden" required="true" />
+      <p>
+        {{ categoryData?.text }}
+        <ion-icon [name]="categoryData?.icon"></ion-icon>
+      </p>
+    </ion-item>
+
+    <ion-item class="padding">
+      <ion-label>Repetir</ion-label>
+      <ion-toggle formControlName="repeat"></ion-toggle>
+    </ion-item>
+
+    <section
+      class="repeat-expenses"
+      *ngIf="this.expense.controls['repeat']?.value"
+    >
+      <ion-radio-group formControlName="repeatType">
+        <ion-item class="padding">
+          <ion-label>Mensalmente</ion-label>
+          <ion-radio value="fixed"></ion-radio>
+        </ion-item>
+
+        <ion-item class="padding">
+          <ion-label>Parcelas</ion-label>
+          <ion-radio value="portion"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+
+      <ion-item
+        class="padding"
+        *ngIf="this.expense.controls['repeatType'].value == 'portion'"
+      >
+        <ion-label position="floating">Quantidade de Parcelas</ion-label>
+        <ion-input
+          type="number"
+          inputmode="tel"
+          formControlName="qtyPortion"
+          min="1"
+        ></ion-input>
+      </ion-item>
+    </section>
+
+    <ion-button
+      class="ion-padding"
+      type="submit"
+      [disabled]="!this.expense.valid"
+      expand="block"
+      fill="outline"
+    >
+      Adicionar Despesa</ion-button
+    >
+  </form>
+</ion-content>

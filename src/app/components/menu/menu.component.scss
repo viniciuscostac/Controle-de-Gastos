@@ -1,0 +1,28 @@
+.menuNavegate {
+  --max-width: 75%;
+}
+.styleTextMenu {
+  font-family: 'Trebuchet MS', sans-serif;
+}
+
+.alignIcon {
+  display: flex;
+  align-items: center;
+}
+
+.user-data {
+  text-align: center;
+  padding: 15% 0;
+  border-top: 3px solid black;
+
+  ion-avatar,
+  ion-label {
+    margin: 0 auto;
+    margin-bottom: 4%;
+  }
+}
+
+ion-toolbar {
+  --background: #154cc4;
+  color: white;
+}

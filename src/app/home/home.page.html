@@ -1,0 +1,23 @@
+<ion-header class="margin-home">
+  <app-month-year-select
+    (eventMonthYear)="getExpensesMonth($event)"
+  ></app-month-year-select>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-expense-items *ngIf="expenses" [expenses]="expenses"></app-expense-items>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="translucent">
+    <ion-title class="total"
+      >Total Mês: {{ getSumAllExpenses() | currency: 'BRL' }}</ion-title
+    >
+
+    <ion-buttons slot="end">
+      <ion-button (click)="createExpensePage()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
